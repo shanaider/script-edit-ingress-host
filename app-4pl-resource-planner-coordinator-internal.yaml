@@ -1,0 +1,95 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: app-4pl-resource-planner-coordinator-http.resource-planner.wfm.pt.internal,app-4pl-resource-planner-coordinator-grpc.resource-planner.wfm.pt.internal
+    meta.helm.sh/release-name: app-4pl-resource-planner-coordinator
+    meta.helm.sh/release-namespace: resource-planner
+  creationTimestamp: "2023-02-27T07:18:59Z"
+  generation: 2
+  labels:
+    app.kubernetes.io/instance: app-4pl-resource-planner-coordinator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: 4pl-resource-planner-coordinator
+    helm.sh/chart: helm-generic-deployment-0.1.0
+    velero.io/backup-name: wfm-dev-include-pvc-tks
+    velero.io/restore-name: restore-form-dev-3
+  managedFields:
+  - apiVersion: extensions/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:helm.sh/chart: {}
+          f:velero.io/backup-name: {}
+          f:velero.io/restore-name: {}
+      f:spec:
+        f:ingressClassName: {}
+    manager: velero-server
+    operation: Update
+    time: "2023-02-27T07:18:59Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: manager
+    operation: Update
+    time: "2023-02-27T07:19:01Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:external-dns.alpha.kubernetes.io/hostname: {}
+    manager: kubectl-annotate
+    operation: Update
+    time: "2023-03-01T03:20:52Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:rules: {}
+    manager: kubectl-patch
+    operation: Update
+    time: "2023-03-08T08:02:17Z"
+  name: app-4pl-resource-planner-coordinator-internal
+  namespace: resource-planner
+  resourceVersion: "6253518"
+  uid: 415ed2c4-f49d-4016-9c9e-446d5a9ca877
+spec:
+  ingressClassName: kong-intranet
+  rules:
+  - host: app-4pl-resource-planner-coordinator-http.resource-planner.wfm.pt.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: app-4pl-resource-planner-coordinator-http
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: app-4pl-resource-planner-coordinator-grpc.resource-planner.dev.tel.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: app-4pl-resource-planner-coordinator-grpc
+            port:
+              number: 9080
+        path: /
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 172.16.28.78
